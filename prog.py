@@ -18,7 +18,7 @@ def calculaDistancia(idx, i, entrada, robo):
 def distPercorridaRobo(robo, entrada):
     print(sum(list([calculaDistancia(idx,i,entrada,robo) for idx,i in enumerate(list([x[2] for x in entrada if x[0] == robo]))])))
         
-distPercorridaRobo('robo1', reg1)
+#distPercorridaRobo('robo1', reg1)
 
 
 # --------- LETRA B --------- 
@@ -28,9 +28,27 @@ def roboMaiorDistFinalOrigem(entrada):
 
     print(max(lista, key=lambda x: distancia((0,0), x[2]))[0])
 
-roboMaiorDistFinalOrigem(reg1)
+#roboMaiorDistFinalOrigem(reg1)
 
 
 # --------- LETRA C --------- 
 
+def distPercorridaRoboC(robo, entrada):
+    return sum(list([calculaDistancia(idx,i,entrada,robo) for idx,i in enumerate(list([x[2] for x in entrada if x[0] == robo]))]))
+
+def caminhosRobos(entrada):
+    #retorna o caminho feito em x e y para cada robo
+    def caminhoRobo(robo, entrada):
+        return list([distPercorridaRoboC(robo, entrada)] + [(0,0)] + [x[2] for x in entrada if x[0] == robo])
+        
+    print(sorted(list([x] + caminhoRobo(x, entrada) for x in list(set(x[0] for x in entrada))), key=lambda x: x[1]))
+
+caminhosRobos(reg1)
+
 # --------- LETRA D --------- 
+
+def roboIdentificaMaisVitimas(entrada):
+    print(max(list(set(x[0] for x in entrada)), key=lambda x: sum(y[3] for y in entrada if y[0] == x)))
+    
+
+# roboIdentificaMaisVitimas(reg1)
